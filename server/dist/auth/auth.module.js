@@ -16,11 +16,14 @@ let AuthModule = class AuthModule {
 AuthModule = __decorate([
     Module({
         providers: [AuthService, UserService, LocalStrategy],
-        imports: [PassportModule, JwtModule.register({
+        imports: [
+            PassportModule,
+            JwtModule.register({
                 secret: process.env.SECRET_KEY,
-                signOptions: { expiresIn: '8hrs' }
-            })],
-        controllers: [AuthController]
+                signOptions: { expiresIn: '8hrs' },
+            }),
+        ],
+        controllers: [AuthController],
     })
 ], AuthModule);
 export { AuthModule };

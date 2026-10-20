@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException, } from '@nestjs/common';
 import { PrismaService } from '../infrastructure/prisma/prisma.service.js';
 let UserService = class UserService {
     prisma;
@@ -19,7 +19,7 @@ let UserService = class UserService {
             const user = await this.prisma.user.findUnique({
                 where: {
                     username,
-                }
+                },
             });
             if (user)
                 return user;
@@ -29,6 +29,46 @@ let UserService = class UserService {
             if (error instanceof Error) {
                 throw new InternalServerErrorException(error.message);
             }
+        }
+    }
+    async crateUser(body) {
+        try {
+            const newUser = await this.prisma.user.create({
+                data: {
+                    name: body.name,
+                    username: body.username,
+                    password: body.password,
+                },
+            });
+            const { password, ...result } = newUser;
+            return result;
+        }
+        catch (error) {
+            if (error instanceof Error)
+                throw new InternalServerErrorException(error.message);
+        }
+    }
+    async getUser(userId) {
+        try {
+            const user = await this.prisma.user.findUnique({
+                where: {
+                    id: userId,
+                },
+                include: {
+                    contacs: true,
+                },
+            });
+            if (!user)
+                throw new NotFoundException('User not found');
+            const { password, ...result } = user;
+            return result;
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                throw new InternalServerErrorException(error.message);
+            }
+            if (error instanceof NotFoundException)
+                throw new NotFoundException(error.message);
         }
     }
 };
