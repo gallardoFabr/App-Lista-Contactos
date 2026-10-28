@@ -15,7 +15,7 @@ export declare class AuthService {
         name: string;
         username: string;
         createdAt: Date;
-        contacts?: any[];
+        contacts?: import("../contact/contact.entity.js").ContactEntity[];
     } | null | undefined>;
     login(user: userEntity): Promise<{
         user: userEntity;

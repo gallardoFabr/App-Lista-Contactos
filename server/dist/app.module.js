@@ -10,11 +10,12 @@ import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { UserModule } from './user/user.module.js';
 import { PrismaModule } from './infrastructure/prisma/prisma.module.js';
+import { ContactModule } from './contact/contact.module.js';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     Module({
-        imports: [AuthModule, UserModule, PrismaModule],
+        imports: [AuthModule, UserModule, PrismaModule, ContactModule],
         controllers: [AppController],
         providers: [AppService],
     })

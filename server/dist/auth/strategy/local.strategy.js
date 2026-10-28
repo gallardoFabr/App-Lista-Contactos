@@ -20,7 +20,11 @@ let LocalStrategy = class LocalStrategy extends PassportStrategy(Strategy) {
     async validate(username, password) {
         const user = await this.authService.validateUser({ username, password });
         if (!user) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException({
+                statusCode: 401,
+                message: 'Las credenciales son incorrectas',
+                error: 'Unauthorized',
+            });
         }
         return user;
     }

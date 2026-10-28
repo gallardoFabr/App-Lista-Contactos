@@ -11,11 +11,12 @@ import { UserService } from '../user/user.service.js';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategy/local.strategy.js';
+import { JwtStrategy } from './strategy/jwt.strategy.js';
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     Module({
-        providers: [AuthService, UserService, LocalStrategy],
+        providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
         imports: [
             PassportModule,
             JwtModule.register({

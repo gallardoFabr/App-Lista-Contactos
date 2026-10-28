@@ -12,7 +12,7 @@ let UserModule = class UserModule {
 UserModule = __decorate([
     Module({
         providers: [UserService],
-        controllers: [UserController]
+        controllers: [UserController],
     })
 ], UserModule);
 export { UserModule };

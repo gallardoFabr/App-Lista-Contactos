@@ -14,21 +14,22 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  username  String   @unique
+  username  String    @unique
   password  String
-  createdAt DateTime @default(now())
-  contacs   Contac[]
+  createdAt DateTime  @default(now())
+  contacs   Contact[]
 }
 
-model Contac {
-  id       Int    @id @default(autoincrement())
-  name     String
-  lastName String
-  email    String
-  phone    String
-  address  String
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  lastName  String
+  email     String
+  phone     String
+  address   String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }

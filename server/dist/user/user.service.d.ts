@@ -6,5 +6,5 @@ export declare class UserService {
     constructor(prisma: PrismaService);
     findOneUser(username: string): Promise<userEntity | null | undefined>;
     crateUser(body: CreateUserDto): Promise<userEntity | undefined>;
-    getUser(userId: number): Promise<userEntity | undefined>;
+    getUserById(userId: number): Promise<userEntity | undefined>;
 }
